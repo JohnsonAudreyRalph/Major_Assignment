@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div class="content">
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-17">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script >
+      var options = {
+  chart: {
+    type: 'boxPlot',
+    height: 400,
+    width: '100%',
+  },
+  series: [
+    {
+      name: 'Sample Data',
+      data: [
+        {
+          x: 'Category 1',
+          y: [10, 20, 30, 40, 50, 60, 70],
+        },
+        {
+          x: 'Category 2',
+          y: [15, 25, 35, 45, 55, 65, 75],
+        },
+        // Add more data sets as needed
+      ],
+    },
+  ],
+  xaxis: {
+    type: 'category',
+    categories: ['Category 1', 'Category 2'],
+  },
+};
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+  </script>
+</body>
+</html>

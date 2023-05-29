@@ -10,6 +10,95 @@
     <script src="{% static 'js/JavaScript.js' %}"></script>
 </head>
 <body>
+    <div class="content">
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-17">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="Char"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            new ApexCharts(document.querySelector("#Char"), {
+                series: [
+                    {
+                        type: 'area',
+                        name: 'Giá mở cửa',
+                        data: {{ Open|safe }},
+                    },
+                    {
+                        type: 'area',
+                        name: 'Giá cao nhất',
+                        data: {{ High|safe }},
+                    },
+                    {
+                        type: 'area',
+                        name: 'Giá thấp nhất',
+                        data: {{ Low|safe }},
+                    },
+                    {
+                        type: 'area',
+                        name: 'Giá đóng cửa',
+                        data: {{ Close|safe }},
+                    }
+                ],
+                chart: {
+                    width: '100%',
+                    height: 650,
+                    type: 'area',
+                    toolbar: {
+                    show: false
+                    },
+                },
+                markers: {
+                    size: 4
+                },
+                title: {
+                    text: 'Mô hình trực quan dữ liệu',
+                    align: 'center',
+                    margin: 20,
+                    offsetY: 20,
+                    style: {
+                        fontSize: '25px'
+                    }
+                },
+                colors: ['#4154f1', '#2eca6a', '#ff771d', '#9C27B0'],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.3,
+                        opacityTo: 0.4,
+                        stops: [0, 90, 100]
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 2
+                },
+                xaxis: {
+                    type: 'date',
+                    categories: {{ Day|safe }}
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd/MM/yy'
+                    },
+                }
+            }).render();
+
+
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </body>
 </html>
